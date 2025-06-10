@@ -14,8 +14,11 @@ lbl.grid()
 lbl2 = Label (root, text = "Enter file name")
 lbl2.grid (column =0, row=1)
 
-txt = Entry(root, width=10)
-txt.grid(column =1, row=0)
+url = Entry(root, width=10)
+url.grid(column =1, row=0)
+
+file_name = Entry(root, width=10)
+file_name.grid(column=1, row=1)
 
 def clicked():
 
@@ -23,7 +26,7 @@ def clicked():
 #file_name = input('Save image as (string):')
 
     try: 
-        res = requests.get(txt, stream = True)
+        res = requests.get(url, stream = True)
         res.raise_for_status()
 
         content_type = res.headers.get('Content-Type', '')
@@ -43,3 +46,9 @@ def clicked():
 
     except requests.exceptions.RequestException as e:
         print('FAIL FAIL!! FAIL!!!')
+
+btn = Button(root, text = "Enter" ,
+        fg = "red", command=clicked)
+btn.grid(column=2, row=3)
+
+root.mainloop()
