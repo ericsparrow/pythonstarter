@@ -6,7 +6,7 @@ from tkinter import *
 root = Tk()
 
 root.title("Photo Downloader by RICKY MONEY")
-root.geometry('400x200')
+root.geometry('400x100')
 
 lbl = Label(root, text = "Enter URL")
 lbl.grid()
@@ -14,10 +14,10 @@ lbl.grid()
 lbl2 = Label (root, text = "Enter file name")
 lbl2.grid (column =0, row=1)
 
-url = Entry(root, width=10)
+url = Entry(root, width=30)
 url.grid(column =1, row=0)
 
-file_name = Entry(root, width=10)
+file_name = Entry(root, width=30)
 file_name.grid(column=1, row=1)
 
 def clicked():
