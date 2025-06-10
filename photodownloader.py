@@ -6,7 +6,7 @@ from tkinter import *
 root = Tk()
 
 root.title("Photo Downloader by RICKY MONEY")
-root.geometry('350x400')
+root.geometry('400x200')
 
 lbl = Label(root, text = "Enter URL")
 lbl.grid()
@@ -21,12 +21,11 @@ file_name = Entry(root, width=10)
 file_name.grid(column=1, row=1)
 
 def clicked():
+    input_url = url.get()
+    input_file_name = file_name.get()
 
-#url = input('Please enter an image URL (string):')
-#file_name = input('Save image as (string):')
-
-    try: 
-        res = requests.get(url, stream = True)
+    try:
+        res = requests.get(input_url, stream=True)
         res.raise_for_status()
 
         content_type = res.headers.get('Content-Type', '')
@@ -34,18 +33,17 @@ def clicked():
             extension = mimetypes.guess_extension(content_type.split(';')[0])
             if not extension:
                 extension = '.jpg'
-        
-            full_file_name = file_name + extension
+
+            full_file_name = input_file_name + extension
 
             with open(full_file_name, 'wb') as f:
                 shutil.copyfileobj(res.raw, f)
 
-            print('Image was successfully downloaded you fat bitch')
+            print('Image was successfully downloaded.')
         else:
-            print('The URL is wrong you dumb idiot')
-
+            print('The URL does not appear to be an image.')
     except requests.exceptions.RequestException as e:
-        print('FAIL FAIL!! FAIL!!!')
+        print(f'FAIL FAIL FAIL: {e}')
 
 btn = Button(root, text = "Enter" ,
         fg = "red", command=clicked)
