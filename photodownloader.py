@@ -5,23 +5,28 @@ from tkinter import *
 from tkinter import filedialog
 import os
 
+root = Tk()
+
+folder_var = StringVar()
+
 def browse_folder():
+    global selected_folder
     foldername = filedialog.askdirectory()
     if foldername:
-        print(f"Selected folder: {foldername}")
-        directory = foldername.get()
-
-root = Tk()
+        folder_var.set(foldername)
 
 root.title("Photo Downloader by RICKY MONEY")
 root.geometry('400x100')
 
 browse_button = Button(root, text="Select Folder...", command=browse_folder)
 browse_button.pack(pady=20)
-browse_button.grid (column =3, row=3)
+browse_button.grid (column =2, row=3)
 
 destfolder = Label(root, text = "Destination")
 destfolder.grid(column=0, row=3)
+
+displayfolder = Entry(root, textvariable=folder_var, width=30)
+displayfolder.grid(column=1, row=3)
 
 lbl = Label(root, text = "Enter URL")
 lbl.grid(column =0, row =0)
