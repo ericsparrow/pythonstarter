@@ -2,14 +2,29 @@ import requests
 import shutil
 import mimetypes
 from tkinter import *
+from tkinter import filedialog
+import os
+
+def browse_folder():
+    foldername = filedialog.askdirectory()
+    if foldername:
+        print(f"Selected folder: {foldername}")
+        directory = foldername.get()
 
 root = Tk()
 
 root.title("Photo Downloader by RICKY MONEY")
 root.geometry('400x100')
 
+browse_button = Button(root, text="Select Folder...", command=browse_folder)
+browse_button.pack(pady=20)
+browse_button.grid (column =3, row=3)
+
+destfolder = Label(root, text = "Destination")
+destfolder.grid(column=0, row=3)
+
 lbl = Label(root, text = "Enter URL")
-lbl.grid()
+lbl.grid(column =0, row =0)
 
 lbl2 = Label (root, text = "Enter file name")
 lbl2.grid (column =0, row=1)
@@ -47,6 +62,6 @@ def clicked():
 
 btn = Button(root, text = "Enter" ,
         fg = "red", command=clicked)
-btn.grid(column=2, row=3)
+btn.grid(column=2, row=4)
 
 root.mainloop()
