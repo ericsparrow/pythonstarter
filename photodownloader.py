@@ -41,6 +41,7 @@ file_name = Entry(root, width=30)
 file_name.grid(column=1, row=1)
 
 def clicked():
+    global file_extension
     input_url = url.get()
     input_file_name = file_name.get()
 
@@ -51,6 +52,7 @@ def clicked():
         content_type = res.headers.get('Content-Type', '')
         if 'image' in content_type:
             extension = mimetypes.guess_extension(content_type.split(';')[0])
+            file_extension = extension
             if not extension:
                 extension = '.jpg'
 
@@ -64,6 +66,10 @@ def clicked():
             print('The URL does not appear to be an image.')
     except requests.exceptions.RequestException as e:
         print(f'FAIL FAIL FAIL: {e}')
+
+file_extension = ""
+
+full_file_path = os.path.join(folder_var, file_name + file_extension)
 
 btn = Button(root, text = "Enter" ,
         fg = "red", command=clicked)
