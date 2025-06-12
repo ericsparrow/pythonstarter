@@ -58,7 +58,11 @@ def clicked():
 
             full_file_name = input_file_name + extension
 
-            with open(full_file_name, 'wb') as f:
+            file_extension = ""
+
+            full_file_path = os.path.join(folder_var.get(), full_file_name)
+
+            with open(full_file_path, 'wb') as f:
                 shutil.copyfileobj(res.raw, f)
 
             print('Image was successfully downloaded.')
@@ -66,10 +70,6 @@ def clicked():
             print('The URL does not appear to be an image.')
     except requests.exceptions.RequestException as e:
         print(f'FAIL FAIL FAIL: {e}')
-
-file_extension = ""
-
-full_file_path = os.path.join(folder_var, file_name + file_extension)
 
 btn = Button(root, text = "Enter" ,
         fg = "red", command=clicked)
